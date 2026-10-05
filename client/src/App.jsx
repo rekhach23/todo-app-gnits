@@ -37,8 +37,9 @@ function App() {
   const handleUpdate = (id, data) =>
     run(async () => {
       const updated = await updateTodo(id, data);
-      // TODO: Complete this. Update the `todos` state so the edited todo is
-      // replaced with `updated` (keep every other todo as it is).
+      setTodos((prev) =>
+        prev.map((todo) => (todo._id === id ? { ...todo, ...updated } : todo))
+      );
     });
 
   const handleDelete = (id) =>
